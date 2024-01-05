@@ -1,0 +1,39 @@
+.header {
+  @apply flex p-3 w-full;
+  gap: var(--gap);
+}
+
+.header > div {
+  @apply text-center py-3;
+  border: var(--border);
+}
+
+.header-box {
+  height: var(--box-height);
+  flex-grow: 1;
+}
+.header-bigger-box {
+  height: var(--box-height);
+  flex-grow: 2;
+}
+
+.main {
+  @apply pt-3;
+}
+.main > div {
+  @apply gap-3 w-full;
+}
+
+.main > div > div {
+  border: var(--border);
+}
+
+.main-box {
+  @apply flex flex-grow justify-center self-center h-full;
+}
+
+.footer {
+  @apply p-3 w-full flex justify-center absolute bottom-0 m-3;
+  gap: var(--gap);
+  border: var(--border);
+}

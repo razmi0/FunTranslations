@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=DotGothic16&display=swap");
+@import "./assets/css/custom.css";
+@import "./assets/css/button.css";
+@import "./assets/css/input.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --box-height: 100px;
+  --gap: 10px;
+  --border: 1px solid white;
+  --font-style-1: "DotGothic16", sans-serif;
+
+  --color-1: #febf00;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: var(--font-style-1);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-style-1), -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #282c34;
+  height: 100vh;
+  padding: 2%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  color: white;
+  gap: 20px;
+}
