@@ -2,7 +2,7 @@ import type { Component } from "solid-js";
 import Header from "./components/Header";
 import Main from "./components/Main";
 
-const headerText = ["Text in the first cell", "Text in the second cell", "Text in the third cell"];
+const headerText = ["Welcome to Translator", "The only purpose is to do fun translation", "Fun translation is fun"];
 const mainTitle = "Translations from another world";
 
 const App: Component = () => {
