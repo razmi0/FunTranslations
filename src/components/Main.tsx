@@ -1,4 +1,5 @@
 import { createSignal, createResource } from "solid-js";
+import { createStore } from "solid-js/store";
 import Select from "./Select";
 import Translation from "./Translation";
 import { masters } from "../data";
@@ -25,7 +26,8 @@ const buildUrl = (master: string = defaultMaster, text: string = defaultText) =>
 const Main = (props: MainProps) => {
   const [url, setUrl] = createSignal<string>();
   const [master, setMaster] = createSignal<Master>(defaultMaster);
-  const [result] = createResource(url, fetchTranslation);
+  /* result is fetched when url is refreshed by user activity */
+  const [result /*{ mutate, refetch }*/] = createResource(url, fetchTranslation);
 
   const buildAndSetUrl = (master: Master, text: string) => {
     setUrl(buildUrl(master, text));

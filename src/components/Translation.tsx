@@ -1,4 +1,5 @@
-import { Component, Resource, Show, createSignal } from "solid-js";
+import { Resource, createSignal } from "solid-js";
+import Output from "./Output";
 // import type { Master } from "../data";
 
 type TranslationProps = {
@@ -34,22 +35,6 @@ const Translation = (props: TranslationProps) => {
       </div>
       <Output result={props.result} />
     </div>
-  );
-};
-
-const Output = (props: { result: Resource<string | undefined> }) => {
-  return (
-    <>
-      <Show when={props.result.loading}>
-        <div class="w-full min-h-10">Loading...</div>
-      </Show>
-      <Show when={props.result.error}>
-        <div class="w-full min-h-10">No 💋 : {props.result.error}</div>
-      </Show>
-      <Show when={props.result()}>
-        <output class="w-full min-h-10">{props.result()}</output>
-      </Show>
-    </>
   );
 };
 

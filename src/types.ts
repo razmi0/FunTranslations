@@ -1,3 +1,7 @@
+type HasEmoji = [boolean, string | [], string, string] & {};
+
+type UnicodeString = `&#x${string};` | string;
+
 type FunTranslationResponse =
   | ({
       success: {
