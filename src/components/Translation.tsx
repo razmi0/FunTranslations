@@ -1,15 +1,16 @@
-import { Component, createSignal } from "solid-js";
+import { Component, Resource, Show, createSignal } from "solid-js";
+import type { Master } from "../data";
 
 type TranslationProps = {
-  handleCLick: (master: string, text: string) => void;
-  result: string;
-  master: string;
+  handleClick: (master: Master, text: string) => void;
+  result: Resource<string | undefined>;
+  master: Master;
 };
 const Translation = (props: TranslationProps) => {
   const [text, setText] = createSignal<string>("");
 
   const translate = () => {
-    props.handleCLick(props.master, text());
+    props.handleClick(props.master, text());
   };
 
   return (
@@ -31,8 +32,24 @@ const Translation = (props: TranslationProps) => {
           <span>Translate</span>
         </button>
       </div>
-      <output class="w-full min-h-10">{props.result}</output>
+      <Output result={props.result} />
     </div>
+  );
+};
+
+const Output = (props: { result: Resource<string | undefined> }) => {
+  return (
+    <>
+      <Show when={props.result.loading}>
+        <div class="w-full min-h-10">Loading...</div>
+      </Show>
+      <Show when={props.result.error}>
+        <div class="w-full min-h-10">No 💋 : {props.result.error}</div>
+      </Show>
+      <Show when={props.result()}>
+        <output class="w-full min-h-10">{props.result()}</output>
+      </Show>
+    </>
   );
 };
 
