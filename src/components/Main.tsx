@@ -1,22 +1,23 @@
-import { createSignal, createResource } from "solid-js";
-import { createStore } from "solid-js/store";
+import { createSignal, createResource, createEffect, For, Show, onMount } from "solid-js";
+import { createStore, produce } from "solid-js/store";
 import Select from "./Select";
 import Translation from "./Translation";
+import History from "./History";
 import { masters } from "../data";
+import { emojize, hasEmoji, urlifyText } from "../helpers";
 
 const baseUrl = "https://api.funtranslations.com/translate/";
 const defaultMaster = "Yoda";
 const defaultText = "How do you suck so hard at this";
 
-const urlifyText = (text: string) => {
-  return text.replace(/\s/g, "%20");
-};
-
 const fetchTranslation = async (url: string) => {
-  console.log("FETCHING");
   const response = await fetch(url);
   const data: FunTranslationResponse = await response.json();
-  return data?.contents.translated;
+
+  if (hasEmoji(data.contents.translated)) {
+    data.contents.translated = emojize(data.contents.translated);
+  }
+  return data.contents as FunTranslationResponse["contents"];
 };
 
 const buildUrl = (master: string = defaultMaster, text: string = defaultText) => {
@@ -26,12 +27,23 @@ const buildUrl = (master: string = defaultMaster, text: string = defaultText) =>
 const Main = (props: MainProps) => {
   const [url, setUrl] = createSignal<string>();
   const [master, setMaster] = createSignal<Master>(defaultMaster);
-  /* result is fetched when url is refreshed by user activity */
-  const [result /*{ mutate, refetch }*/] = createResource(url, fetchTranslation);
+  const [content /*{ mutate, refetch }*/] = createResource(url, fetchTranslation);
+  const [history, setHistory] = createStore<HistoryType>({ past: [] });
 
   const buildAndSetUrl = (master: Master, text: string) => {
     setUrl(buildUrl(master, text));
   };
+
+  createEffect(() => {
+    const contentValue = content();
+    if (contentValue) {
+      setHistory(
+        produce((draft) => {
+          if (draft && Array.isArray(draft.past)) draft.past.push(contentValue);
+        })
+      );
+    }
+  });
 
   return (
     <main class="main">
@@ -39,7 +51,8 @@ const Main = (props: MainProps) => {
         <h2 class="inline">{props.title} : </h2>
         <Select masters={masters} defaultMaster={defaultMaster as Master} onSelected={setMaster} />
       </div>
-      <Translation handleClick={buildAndSetUrl} result={result} master={master()} />
+      <Translation handleClick={buildAndSetUrl} result={content} master={master()} />
+      <History history={history} />
     </main>
   );
 };
