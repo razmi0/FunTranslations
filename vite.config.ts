@@ -8,11 +8,18 @@ export default defineConfig({
     Uncomment the following line to enable solid-devtools.
     For more info see https://github.com/thetarnav/solid-devtools/tree/main/packages/extension#readme
     */
-    // devtools(),
+    // devtools({
+    //   autoname: true,
+    //   locator: {
+    //     targetIDE: "vscode",
+    //     componentLocation: true,
+    //     jsxLocation: true,
+    //   },
+    // }),
     solidPlugin(),
   ],
   server: {
-    port: 3000,
+    port: 42069,
   },
   build: {
     target: "esnext",
