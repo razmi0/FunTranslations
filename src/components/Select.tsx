@@ -1,12 +1,12 @@
 import { For } from "solid-js";
-import type { Setter } from "solid-js";
+import type { Setter, VoidComponent } from "solid-js";
 
 type SelectProps = {
   masters: Master[];
   defaultMaster: Master;
   onSelected: Setter<Master>;
 };
-const Select = (props: SelectProps) => {
+const Select: VoidComponent<SelectProps> = (props) => {
   const handleSelectMaster = (e: Event) => {
     const master = (e.target as HTMLInputElement).value as Master;
     props.onSelected(master);
