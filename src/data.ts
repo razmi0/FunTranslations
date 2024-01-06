@@ -74,7 +74,7 @@ export const masters: Master[] = [
   "Wheel-of-time-old-tongue",
 ];
 
-type Master =
+export type Master =
   | "Starwars"
   | "Startrek"
   | "Got"

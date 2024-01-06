@@ -8,12 +8,8 @@ type TranslationProps = {
 const Translation = (props: TranslationProps) => {
   const [text, setText] = createSignal<string>("");
 
-  const handleCLick = () => {
+  const translate = () => {
     props.handleCLick(props.master, text());
-  };
-
-  const handleTextChange = (e: Event) => {
-    setText((e.target as HTMLInputElement).value);
   };
 
   return (
@@ -26,10 +22,12 @@ const Translation = (props: TranslationProps) => {
             class="input w-full mr-2"
             name="text"
             placeholder="Text to translate"
-            onInput={(e) => handleTextChange(e)}
+            onInput={(e: Event) => {
+              setText((e.target as HTMLInputElement).value);
+            }}
           />
         </div>
-        <button onClick={handleCLick}>
+        <button onClick={translate}>
           <span>Translate</span>
         </button>
       </div>
