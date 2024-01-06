@@ -3,7 +3,7 @@ import Output from "./Output";
 
 type TranslationProps = {
   handleClick: (master: Master, text: string) => void;
-  result: Resource<string | undefined>;
+  result: Resource<FunTranslationResponse["contents"] | undefined>;
   master: Master;
 };
 const Translation = (props: TranslationProps) => {
@@ -15,7 +15,7 @@ const Translation = (props: TranslationProps) => {
 
   return (
     <div class="flex flex-col">
-      <div class="flex flex-row">
+      <div class="flex flex-row bordered">
         <div class="main-box text-5xl">{props.master.toLocaleUpperCase()}</div>
         <div class="main-box">
           <input
