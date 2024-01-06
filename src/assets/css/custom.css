@@ -24,8 +24,28 @@
   @apply gap-3 w-full;
 }
 
-.main > div > div {
+.bordered {
   border: var(--border);
+}
+
+.three-points-animation::after {
+  animation: three-points 1.5s infinite;
+  content: "...";
+}
+
+@keyframes three-points {
+  0% {
+    content: "";
+  }
+  33% {
+    content: ".";
+  }
+  66% {
+    content: "..";
+  }
+  100% {
+    content: "...";
+  }
 }
 
 .main-box {
@@ -33,7 +53,7 @@
 }
 
 .footer {
-  @apply p-3 w-full flex justify-center absolute bottom-0 m-3;
+  @apply p-3 w-fit flex justify-center absolute bottom-0 m-3 px-10;
   gap: var(--gap);
   border: var(--border);
 }
