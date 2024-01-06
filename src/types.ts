@@ -2,18 +2,20 @@ type HasEmoji = [boolean, string | [], string, string] & {};
 
 type UnicodeString = `&#x${string};` | string;
 
-type FunTranslationResponse =
-  | ({
-      success: {
-        total: number;
-      };
-      contents: {
-        translated: string;
-        text: string;
-        translation: string;
-      };
-    } & {})
-  | null;
+type HistoryType = {
+  past: FunTranslationResponse["contents"][];
+};
+
+type FunTranslationResponse = {
+  success: {
+    total: number;
+  };
+  contents: {
+    translated: string;
+    text: string;
+    translation: string;
+  };
+};
 
 type MainProps = {
   title: string;
