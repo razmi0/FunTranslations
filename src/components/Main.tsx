@@ -1,27 +1,12 @@
-import { For, Setter, createSignal, createResource } from "solid-js";
-import { masters } from "../data";
+import { createSignal, createResource } from "solid-js";
+import Select from "./Select";
 import Translation from "./Translation";
-import type { Master } from "../data";
+import { masters } from "../data";
 
 const baseUrl = "https://api.funtranslations.com/translate/";
 const defaultMaster = "Yoda";
 const defaultText = "How do you suck so hard at this";
-type FunTranslationResponse =
-  | ({
-      success: {
-        total: number;
-      };
-      contents: {
-        translated: string;
-        text: string;
-        translation: string;
-      };
-    } & {})
-  | null;
 
-type MainProps = {
-  title: string;
-};
 const urlifyText = (text: string) => {
   return text.replace(/\s/g, "%20");
 };
@@ -54,27 +39,6 @@ const Main = (props: MainProps) => {
       </div>
       <Translation handleClick={buildAndSetUrl} result={result} master={master()} />
     </main>
-  );
-};
-
-type SelectProps = {
-  masters: Master[];
-  defaultMaster: Master;
-  onSelected: Setter<Master>;
-};
-const Select = (props: SelectProps) => {
-  const handleSelectMaster = (e: Event) => {
-    const master = (e.target as HTMLInputElement).value as Master;
-    props.onSelected(master);
-  };
-
-  return (
-    <select name="master" class="text-gray-900" onChange={(e) => handleSelectMaster(e)}>
-      <option value={props.defaultMaster} disabled selected>
-        {props.defaultMaster}
-      </option>
-      <For each={props.masters}>{(master) => <option value={master}>{master}</option>}</For>
-    </select>
   );
 };
 

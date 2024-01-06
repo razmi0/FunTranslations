@@ -1,5 +1,5 @@
 import { Component, Resource, Show, createSignal } from "solid-js";
-import type { Master } from "../data";
+// import type { Master } from "../data";
 
 type TranslationProps = {
   handleClick: (master: Master, text: string) => void;
