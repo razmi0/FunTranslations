@@ -5,4 +5,7 @@
 - Signal value is a function (call it) ex : state()
 - No virtual dom => no diffing => no reconciliation => no key
 - onInput fires on every keystroke, onChange fires on blur
-- ⚠️
+- ⚠️ With stored states, each prop value is a signal
+- ⚠️ Access value of stored object with point notation (state.prop)
+- use onMount() for ref or first fast fetches
+- use onCleanup() for unsubscribing
