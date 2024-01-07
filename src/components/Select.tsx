@@ -14,7 +14,7 @@ const Select: VoidComponent<SelectProps> = (props) => {
 
   return (
     <select name="master" class="text-gray-900" onChange={(e) => handleSelectMaster(e)}>
-      <option value={props.defaultMaster} disabled selected>
+      <option value={props.defaultMaster} selected>
         {props.defaultMaster}
       </option>
       <For each={props.masters}>{(master) => <option value={master}>{master}</option>}</For>
