@@ -20,7 +20,7 @@ const Translation: ParentComponent<TranslationProps> = (props) => {
 
   return (
     <div class="flex flex-col">
-      <div class="flex flex-row bordered">
+      <div class="flex flex-row bordered gap-2">
         <SentenceInput setText={setText} text={text} randomSentence={props.randomSentence}>
           {props.children}
         </SentenceInput>

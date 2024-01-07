@@ -12,7 +12,7 @@ const SentenceInput: ParentComponent<SentenceInputProps> = (props) => {
       <div class="main-box">
         <input
           type="text"
-          class="input w-full mr-2"
+          class="input w-full"
           name="text"
           value={props.randomSentence}
           placeholder={props.randomSentence}

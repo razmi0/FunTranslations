@@ -13,7 +13,7 @@ const Select: VoidComponent<SelectProps> = (props) => {
   };
 
   return (
-    <select name="master" class="text-gray-900" onChange={(e) => handleSelectMaster(e)}>
+    <select name="master" class="text-gray-900 input" onChange={(e) => handleSelectMaster(e)}>
       <option value={props.defaultMaster} selected>
         {props.defaultMaster}
       </option>
