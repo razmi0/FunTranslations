@@ -41,8 +41,8 @@ const Main = (props: MainProps) => {
 
   return (
     <main class="main">
-      <div class="my-3 flex">
-        <h2 class="inline">{props.title} : </h2>
+      <div class="my-3 flex items-center">
+        <h2>{props.title} : </h2>
         <Select masters={masters} defaultMaster={defaultMaster()} onSelected={setMaster} />
         <RandomButton
           masters={masters}

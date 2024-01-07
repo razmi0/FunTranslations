@@ -8,7 +8,7 @@ const History: VoidComponent<HistoryProps> = (props) => {
   return (
     <div class="history">
       <Show when={props.history.past.length > 0} fallback={<div class="m-3 pl-3">No history yet</div>}>
-        <h3 class="my-3">History : </h3>
+        <h3 class="my-3">History ({props.history.past.length}) : </h3>
         <ul>
           <For each={props.history.past}>
             {(item) => (
