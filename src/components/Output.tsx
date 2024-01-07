@@ -8,7 +8,7 @@ const Output: VoidComponent<OutputProps> = (props) => {
   return (
     <>
       <Show when={props.result.loading}>
-        <div class="w-full min-h-10 three-points-animation">Loading</div>
+        <div class="w-full min-h-10 three-dots-animation">Loading</div>
       </Show>
       <Show when={!!props.result.error}>
         <div class="w-full min-h-10">No 💋 </div>
