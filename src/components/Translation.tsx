@@ -1,38 +1,33 @@
-import { Resource, createSignal } from "solid-js";
+import { ParentComponent, Resource, children, createEffect, createSignal } from "solid-js";
 import Output from "./Output";
+import SentenceInput from "./SentenceInput";
 
 type TranslationProps = {
   handleClick: (master: Master, text: string) => void;
-  result: Resource<FunTranslationResponse["contents"] | undefined>;
   master: Master;
+  randomSentence: string;
 };
-const Translation = (props: TranslationProps) => {
-  const [text, setText] = createSignal<string>("");
+const Translation: ParentComponent<TranslationProps> = (props) => {
+  const [text, setText] = createSignal<string>(props.randomSentence);
 
   const translate = () => {
     props.handleClick(props.master, text());
   };
 
+  createEffect(() => {
+    setText(props.randomSentence);
+  });
+
   return (
     <div class="flex flex-col">
       <div class="flex flex-row bordered">
-        <div class="main-box text-5xl">{props.master.toLocaleUpperCase()}</div>
-        <div class="main-box">
-          <input
-            type="text"
-            class="input w-full mr-2"
-            name="text"
-            placeholder="Text to translate"
-            onInput={(e: Event) => {
-              setText((e.target as HTMLInputElement).value);
-            }}
-          />
-        </div>
+        <SentenceInput setText={setText} text={text} randomSentence={props.randomSentence}>
+          {props.children}
+        </SentenceInput>
         <button onClick={translate}>
           <span>Translate</span>
         </button>
       </div>
-      <Output result={props.result} />
     </div>
   );
 };
