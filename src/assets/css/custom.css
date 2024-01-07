@@ -28,7 +28,7 @@
   border: var(--border);
 }
 
-.three-points-animation::after {
+.three-dots-animation::after {
   animation: three-points 1.5s infinite;
   content: "...";
 }
