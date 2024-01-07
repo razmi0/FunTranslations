@@ -1,5 +1,6 @@
 import { Show } from "solid-js";
 import type { Resource, VoidComponent } from "solid-js";
+import LinkToGoogle from "./LinkToGoogle";
 
 type OutputProps = {
   result: Resource<FunTranslationResponse["contents"] | undefined>;
@@ -14,9 +15,9 @@ const Output: VoidComponent<OutputProps> = (props) => {
         <div class="w-full min-h-10">No 💋 </div>
       </Show>
       <Show when={props.result()}>
-        <output class="w-full min-h-10">
+        <output class="w-full min-h-10 translated-text">
           {"> "}
-          {props.result()?.translated}
+          <LinkToGoogle searchParam={props.result()?.text || ""}>{props.result()?.translated || ""}</LinkToGoogle>
         </output>
       </Show>
     </>
