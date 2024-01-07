@@ -21,7 +21,7 @@
   @apply pt-3;
 }
 .main > div {
-  @apply gap-3 w-full;
+  @apply gap-2 w-full;
 }
 
 .bordered {
@@ -56,4 +56,9 @@
   @apply p-3 w-fit flex justify-center absolute bottom-0 m-3 px-10;
   gap: var(--gap);
   border: var(--border);
+}
+
+.translated-text {
+  color: var(--color-1);
+  text-decoration: underline;
 }
