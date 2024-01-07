@@ -1,4 +1,4 @@
-import { createSignal, createResource, createEffect, ParentComponent } from "solid-js";
+import { createSignal, createResource, createEffect, ParentComponent, onMount, onCleanup } from "solid-js";
 import { createStore, produce } from "solid-js/store";
 import Select from "./Select";
 import Translation from "./Translation";
@@ -8,6 +8,7 @@ import { masters, sentences } from "../data";
 import { urlifyText } from "../helpers";
 import { fetchTranslation } from "../services/translation";
 import Output from "./Output";
+import { load, save } from "../services/storage";
 
 const buildUrlParam = (master: string = masters[0], text: string = sentences[0]) => {
   return `${master}?text=${urlifyText(text)}`;
@@ -21,13 +22,11 @@ const Main = (props: MainProps) => {
   const [content /*{ mutate, refetch }*/] = createResource(urlParam, fetchTranslation);
   const [history, setHistory] = createStore<HistoryType>({ past: [] });
 
-  const buildAndSetUrlParam = (master: Master, text: string) => {
-    setUrlParam(buildUrlParam(master, text));
-  };
+  onMount(() => setHistory("past", load("history") || []));
 
-  const Heading: ParentComponent = (props) => {
-    return <div class="main-box text-5xl">{props.children}</div>;
-  };
+  const buildAndSetUrlParam = (master: Master, text: string) => setUrlParam(buildUrlParam(master, text));
+
+  const Heading: ParentComponent = (props) => <div class="main-box text-5xl">{props.children}</div>;
 
   createEffect(() => {
     if (content()) {
@@ -36,12 +35,13 @@ const Main = (props: MainProps) => {
           if (draft && Array.isArray(draft.past)) draft.past.push(content()!);
         })
       );
+      save("history", history.past);
     }
   });
 
   return (
     <main class="main">
-      <div class="my-3 flex gap-2">
+      <div class="my-3 flex">
         <h2 class="inline">{props.title} : </h2>
         <Select masters={masters} defaultMaster={defaultMaster()} onSelected={setMaster} />
         <RandomButton
