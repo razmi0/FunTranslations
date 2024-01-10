@@ -28,12 +28,6 @@ export const translationStore = (): TranslationStoreType => {
   const [urlParam, setUrlParam] = createSignal<string>();
   const [content] = createResource(urlParam, fetchTranslation);
 
-  createEffect(() => {
-    console.log("error", content.error);
-    console.log("loading", content.loading);
-    console.log("state", content.state);
-  });
-
   const translate = () => {
     setUrlParam(`${master()}?text=${urlifyText(sentence())}`);
   };
@@ -62,8 +56,9 @@ export const translationStore = (): TranslationStoreType => {
   };
 
   const addHistory = () => {
-    if (!content()) return;
-    setHistory(produce((draft) => draft.past.push(content()!)));
+    const newContent = content();
+    if (!newContent || newContent.isBad) return;
+    setHistory(produce((draft) => draft.past.push(newContent!)));
   };
 
   const onContentChange = () => {

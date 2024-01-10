@@ -2,7 +2,10 @@ type HasEmoji = [boolean, string | [], string, string] & {};
 
 type UnicodeString = `&#x${string};` | string;
 
-type ContentType = FunTranslationResponse["contents"];
+type ContentType = FunTranslationResponse["contents"] & {
+  error: 429 | 401 | 404 | 200;
+  isBad: boolean;
+};
 
 type HistoryType = {
   past: ContentType[];

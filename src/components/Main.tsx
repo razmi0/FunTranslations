@@ -1,3 +1,4 @@
+import { ErrorBoundary } from "solid-js";
 import Translation, { TranslationHeader } from "./Translation";
 import SentenceInput from "./Input";
 import History, { HistoryHeader, HistoryList } from "./History";
@@ -30,18 +31,20 @@ const Main = (props: MainProps) => {
 
         {/* */}
 
-        <Translation>
-          <TranslationHeader>{heading()}</TranslationHeader>
-          <SentenceInput
-            setText={props.store.chooseSentence}
-            text={props.store.sentence()}
-            placeholder={props.store.randomSentence()}
-            onEnter={props.store.translate}
-          />
-          <Button onClick={props.store.translate} classes="h-12">
-            Translate
-          </Button>
-        </Translation>
+        <ErrorBoundary fallback={<div>WROOOOOONG</div>}>
+          <Translation>
+            <TranslationHeader>{heading()}</TranslationHeader>
+            <SentenceInput
+              setText={props.store.chooseSentence}
+              text={props.store.sentence()}
+              placeholder={props.store.randomSentence()}
+              onEnter={props.store.translate}
+            />
+            <Button onClick={props.store.translate} classes="h-12">
+              Translate
+            </Button>
+          </Translation>
+        </ErrorBoundary>
       </div>
 
       {/*  */}
