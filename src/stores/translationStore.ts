@@ -1,9 +1,9 @@
-import { createEffect, createResource, createSignal, onMount, untrack } from "solid-js";
+import { createEffect, createResource, createSignal, on, onMount, untrack } from "solid-js";
 import { mastersList, sentencesList } from "../data";
-import { fetchTranslation } from "./translation";
+import { fetchTranslation } from "../services/fetchTranslation";
 import { createStore, produce } from "solid-js/store";
 import { urlifyText } from "../helpers";
-import { clearKey, load, save } from "./storage";
+import { clearKey, load, save } from "../services/localStorage";
 
 export const translationStore = () => {
   /**
@@ -16,9 +16,9 @@ export const translationStore = () => {
   const [content] = createResource(urlParam, fetchTranslation);
 
   createEffect(() => {
-    console.log("content", content.error);
-    console.log("content", content.loading);
-    console.log("content", content.state);
+    console.log("error", content.error);
+    console.log("loading", content.loading);
+    console.log("state", content.state);
   });
 
   const translate = () => {
@@ -67,6 +67,8 @@ export const translationStore = () => {
    * Randomize
    */
 
+  const [randomSentence, setRandomSentence] = createSignal(sentence());
+
   const randomizeSentence = () => {
     const randomIndex = Math.floor(Math.random() * sentencesList.length);
     setSentence(sentencesList[randomIndex]);
@@ -80,6 +82,7 @@ export const translationStore = () => {
   const randomizeAll = () => {
     randomizeMaster();
     randomizeSentence();
+    setRandomSentence(sentence());
   };
 
   /**
@@ -104,6 +107,7 @@ export const translationStore = () => {
     chooseMaster,
     chooseSentence,
     sentence,
+    randomSentence,
     setSentence,
     setUrlParam,
     content,
