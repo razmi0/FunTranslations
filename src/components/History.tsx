@@ -17,20 +17,34 @@ export const HistoryHeader: ParentComponent<HistoryHeaderProps> = (props) => {
 
 type HistoryItemProps = {
   item: ContentType;
+  deleteItem: () => void;
 };
-const HistoryItem: Component<HistoryItemProps> = (props) => (
-  <li class="mb-1 leading-5">
-    {props.item.translation?.toLocaleUpperCase()} : {props.item.text} {"=>"}{" "}
-    <LinkToGoogle searchParam={props.item.text}>{props.item.translated}</LinkToGoogle>
-  </li>
-);
+const HistoryItem: Component<HistoryItemProps> = (props) => {
+  return (
+    <li class="mb-1 leading-5 flex list-history-element">
+      <button class="mr-3 text-sm appearance-none" onClick={props.deleteItem}>
+        ✖
+      </button>
+      {props.item.translation?.toLocaleUpperCase()} : {props.item.text} {" => "}
+      <LinkToGoogle classes="ml-2" searchParam={props.item.text}>
+        {props.item.translated}
+      </LinkToGoogle>
+    </li>
+  );
+};
 
 type HistoryListProps = {
   history: HistoryType;
+  delete: (index: number) => void;
 };
 export const HistoryList: Component<HistoryListProps> = (props) => (
   <ul class="flex flex-col">
-    <For each={props.history.past}>{(item) => <HistoryItem item={item} />}</For>
+    <For each={props.history.past}>
+      {(item, i) => {
+        const deleteItem = () => props.delete(i());
+        return <HistoryItem deleteItem={deleteItem} item={item} />;
+      }}
+    </For>
   </ul>
 );
 
