@@ -2,8 +2,10 @@ type HasEmoji = [boolean, string | [], string, string] & {};
 
 type UnicodeString = `&#x${string};` | string;
 
+type ContentType = FunTranslationResponse["contents"];
+
 type HistoryType = {
-  past: FunTranslationResponse["contents"][];
+  past: ContentType[];
 };
 
 type FunTranslationResponse = {
