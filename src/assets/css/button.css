@@ -1,16 +1,16 @@
-button {
+.slider-btn {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #183153;
+  /* background: #183153; */
   box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   cursor: pointer;
   border-left: 2px solid var(--color-1);
 }
 
-button:after {
+.slider-btn:after {
   content: " ";
   width: 0%;
   height: 100%;
@@ -20,13 +20,13 @@ button:after {
   right: 0;
 }
 
-button:hover::after {
+.slider-btn:hover::after {
   right: auto;
   left: 0;
   width: 100%;
 }
 
-button span {
+.slider-btn span {
   text-align: center;
   text-decoration: none;
   width: 100%;
@@ -39,7 +39,7 @@ button span {
   transition: all 0.3s ease-in-out;
 }
 
-button:hover span {
+.slider-btn:hover span {
   color: #183153;
   animation: scaleUp 0.3s ease-in-out;
 }
