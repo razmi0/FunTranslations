@@ -1,4 +1,4 @@
-# Notes
+# Notes on SolidJS
 
 - ⚠️ CreateSignal updates for shallow data struct (strings, numbers...) but not for deep data struct (object, array...)
 - ⚠️ No deconstruction of props at component parameters level ( break fined grained updates )
@@ -9,3 +9,7 @@
 - ⚠️ Access value of stored object with point notation (state.prop)
 - use onMount() for ref or first fast fetches
 - use onCleanup() for unsubscribing
+
+# Resources
+
+- [StarWarsApi](https://swapi.dev/)
