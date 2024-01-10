@@ -1,35 +1,35 @@
-import { ParentComponent, Resource, children, createEffect, createSignal } from "solid-js";
-import Output from "./Output";
-import SentenceInput from "./SentenceInput";
+import { JSX, ParentComponent } from "solid-js";
 
-type TranslationProps = {
-  handleClick: (master: Master, text: string) => void;
-  master: Master;
-  randomSentence: string;
-};
-const Translation: ParentComponent<TranslationProps> = (props) => {
-  const [text, setText] = createSignal<string>(props.randomSentence);
-
-  const translate = () => {
-    props.handleClick(props.master, text());
-  };
-
-  createEffect(() => {
-    setText(props.randomSentence);
-  });
-
+const Translation: ParentComponent<{ children: JSX.Element }> = (props) => {
   return (
     <div class="flex flex-col">
-      <div class="flex flex-row bordered gap-2">
-        <SentenceInput setText={setText} text={text} randomSentence={props.randomSentence}>
-          {props.children}
-        </SentenceInput>
-        <button onClick={translate}>
-          <span>Translate</span>
-        </button>
-      </div>
+      <div class="flex flex-row bordered gap-2">{props.children}</div>
     </div>
   );
 };
 
+export const TranslationHeader: ParentComponent = (props) => <div class="main-box text-5xl">{props.children}</div>;
+
+type SentenceInputProps = {
+  setText: (text: string) => void;
+  text: string;
+};
+export const SentenceInput: ParentComponent<SentenceInputProps> = (props) => {
+  return (
+    <>
+      <div class="main-box">
+        <input
+          type="text"
+          class="input w-full"
+          name="text"
+          value={props.text}
+          placeholder={props.text}
+          onInput={(e: Event) => {
+            props.setText((e.target as HTMLInputElement).value);
+          }}
+        />
+      </div>
+    </>
+  );
+};
 export default Translation;

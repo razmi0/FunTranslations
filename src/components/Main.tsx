@@ -1,65 +1,63 @@
-import { createSignal, createResource, createEffect, ParentComponent, onMount, onCleanup } from "solid-js";
-import { createStore, produce } from "solid-js/store";
+import { ParentComponent, createEffect, createMemo } from "solid-js";
+import Translation, { TranslationHeader, SentenceInput } from "./Translation";
+import History, { HistoryHeader, HistoryList } from "./History";
 import Select from "./Select";
-import Translation from "./Translation";
-import History from "./History";
-import RandomButton from "./RandomButton";
-import { masters, sentences } from "../data";
-import { urlifyText } from "../helpers";
-import { fetchTranslation } from "../services/translation";
 import Output from "./Output";
-import { load, save } from "../services/storage";
-
-const buildUrlParam = (master: string = masters[0], text: string = sentences[0]) => {
-  return `${master}?text=${urlifyText(text)}`;
-};
+import Button from "./Button";
+import { mastersList } from "../data";
+import { translationStore } from "../services/stores";
 
 const Main = (props: MainProps) => {
-  const [urlParam, setUrlParam] = createSignal<string>();
-  const [defaultMaster, setDefaultMaster] = createSignal<Master>("Yoda");
-  const [master, setMaster] = createSignal<Master>(masters[0]);
-  const [randomSentence, setRandomSentence] = createSignal<string>(sentences[0]);
-  const [content /*{ mutate, refetch }*/] = createResource(urlParam, fetchTranslation);
-  const [history, setHistory] = createStore<HistoryType>({ past: [] });
+  const { chooseMaster, master, chooseSentence, sentence, translate, randomizeAll, content, history, clearHistory } =
+    translationStore();
 
-  onMount(() => setHistory("past", load("history") || []));
-
-  const buildAndSetUrlParam = (master: Master, text: string) => setUrlParam(buildUrlParam(master, text));
-
-  const Heading: ParentComponent = (props) => <div class="main-box text-5xl">{props.children}</div>;
-
-  createEffect(() => {
-    if (content()) {
-      setHistory(
-        produce((draft) => {
-          if (draft && Array.isArray(draft.past)) draft.past.push(content()!);
-        })
-      );
-      save("history", history.past);
-    }
-  });
+  const heading = () => master().toLocaleUpperCase();
+  const hasHistory = () => history.past.length > 0;
 
   return (
     <main class="main">
-      <div class="my-3 flex items-center">
-        <h2>{props.title} : </h2>
-        <Select masters={masters} defaultMaster={defaultMaster()} onSelected={setMaster} />
-        <RandomButton
-          masters={masters}
-          setMaster={setMaster}
-          setDefaultMaster={setDefaultMaster}
-          setSentence={setRandomSentence}
-        >
+      {/* FIRST SECTION */}
+
+      <MainHeader title={props.title}>
+        <Select masters={mastersList} onSelected={chooseMaster} selected={master} />
+        <Button onClick={randomizeAll} classes="btn">
           Random
-        </RandomButton>
-      </div>
-      <Translation handleClick={buildAndSetUrlParam} master={master()} randomSentence={randomSentence()}>
-        <Heading>{master().toLocaleUpperCase()}</Heading>
+        </Button>
+      </MainHeader>
+
+      {/* SECOND SECTION */}
+
+      <Translation>
+        <TranslationHeader>{heading()}</TranslationHeader>
+        <SentenceInput setText={chooseSentence} text={sentence()} />
+        <Button onClick={translate}>Translate</Button>
       </Translation>
+
+      {/* THIRD SECTION */}
+
       <Output result={content} />
-      <History history={history} />
+      <History when={hasHistory()}>
+        <HistoryHeader historyLength={history.past.length}>
+          <Button classes="h-8" onClick={clearHistory}>
+            Clear
+          </Button>
+        </HistoryHeader>
+        <HistoryList history={history} />
+      </History>
     </main>
   );
 };
+type MainHeaderProps = {
+  title: string;
+};
+const MainHeader: ParentComponent<MainHeaderProps> = (props) => {
+  return (
+    <div class="my-3 flex">
+      <h2>{props.title} : </h2>
+      {props.children}
+    </div>
+  );
+};
 
+// <History history={history} clearHistory={clearHistory} />
 export default Main;
