@@ -10,26 +10,4 @@ const Translation: ParentComponent<{ children: JSX.Element }> = (props) => {
 
 export const TranslationHeader: ParentComponent = (props) => <div class="main-box text-5xl">{props.children}</div>;
 
-type SentenceInputProps = {
-  setText: (text: string) => void;
-  text: string;
-};
-export const SentenceInput: ParentComponent<SentenceInputProps> = (props) => {
-  return (
-    <>
-      <div class="main-box">
-        <input
-          type="text"
-          class="input w-full"
-          name="text"
-          value={props.text}
-          placeholder={props.text}
-          onInput={(e: Event) => {
-            props.setText((e.target as HTMLInputElement).value);
-          }}
-        />
-      </div>
-    </>
-  );
-};
 export default Translation;
