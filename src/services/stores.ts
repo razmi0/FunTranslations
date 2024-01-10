@@ -15,6 +15,12 @@ export const translationStore = () => {
   const [urlParam, setUrlParam] = createSignal<string>();
   const [content] = createResource(urlParam, fetchTranslation);
 
+  createEffect(() => {
+    console.log("content", content.error);
+    console.log("content", content.loading);
+    console.log("content", content.state);
+  });
+
   const translate = () => {
     setUrlParam(`${master()}?text=${urlifyText(sentence())}`);
   };

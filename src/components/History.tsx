@@ -37,7 +37,7 @@ type HistoryHeaderProps = {
 };
 export const HistoryHeader: ParentComponent<HistoryHeaderProps> = (props) => {
   return (
-    <div class="flex flex-row gap-2 items-center">
+    <div class="flex flex-row gap-2 items-center mt-4">
       <h3 class="my-3">History ({props.historyLength}) :</h3>
       {props.children}
     </div>

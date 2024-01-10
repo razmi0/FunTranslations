@@ -1,26 +1,31 @@
-import { Show } from "solid-js";
+import { Match, Show, Switch } from "solid-js";
 import type { Resource, VoidComponent } from "solid-js";
 import LinkToGoogle from "./LinkToGoogle";
 
 type OutputProps = {
-  result: Resource<FunTranslationResponse["contents"] | undefined>;
+  result: Resource<ContentType | undefined>;
 };
 
 const Output: VoidComponent<OutputProps> = (props) => {
+  const text = () => props.result()?.text || "";
+  const translated = () => props.result()?.translated || "";
+
   return (
     <>
-      <Show when={props.result.loading}>
-        <div class="w-full min-h-10 three-dots-animation">Loading</div>
-      </Show>
-      <Show when={!!props.result.error}>
-        <div class="w-full min-h-10">No 💋 </div>
-      </Show>
-      <Show when={props.result()}>
-        <output class="w-full min-h-10 translated-text">
-          {"> "}
-          <LinkToGoogle searchParam={props.result()?.text || ""}>{props.result()?.translated || ""}</LinkToGoogle>
-        </output>
-      </Show>
+      <Switch>
+        <Match when={props.result.loading}>
+          <div class="w-full min-h-10 three-dots-animation">Loading</div>
+        </Match>
+        <Match when={props.result.error}>
+          <div class="w-full min-h-10">No 💋 </div>
+        </Match>
+        <Match when={props.result.latest}>
+          <output class="w-full min-h-10 translated-text">
+            {"> "}
+            <LinkToGoogle searchParam={text()}>{translated()}</LinkToGoogle>
+          </output>
+        </Match>
+      </Switch>
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { ParentComponent, createEffect, createMemo } from "solid-js";
+import { ParentComponent } from "solid-js";
 import Translation, { TranslationHeader, SentenceInput } from "./Translation";
 import History, { HistoryHeader, HistoryList } from "./History";
 import Select from "./Select";
@@ -16,29 +16,33 @@ const Main = (props: MainProps) => {
 
   return (
     <main class="main">
-      {/* FIRST SECTION */}
+      <div class="border-r-2">
+        {/* */}
 
-      <MainHeader title={props.title}>
-        <Select masters={mastersList} onSelected={chooseMaster} selected={master} />
-        <Button onClick={randomizeAll} classes="btn">
-          Random
-        </Button>
-      </MainHeader>
+        <MainHeader title={props.title}>
+          <Select masters={mastersList} onSelected={chooseMaster} selected={master} />
+          <Button onClick={randomizeAll} classes="h-12">
+            Random
+          </Button>
+        </MainHeader>
 
-      {/* SECOND SECTION */}
+        {/* */}
 
-      <Translation>
-        <TranslationHeader>{heading()}</TranslationHeader>
-        <SentenceInput setText={chooseSentence} text={sentence()} />
-        <Button onClick={translate}>Translate</Button>
-      </Translation>
+        <Translation>
+          <TranslationHeader>{heading()}</TranslationHeader>
+          <SentenceInput setText={chooseSentence} text={sentence()} />
+          <Button onClick={translate} classes="h-12">
+            Translate
+          </Button>
+        </Translation>
+      </div>
 
-      {/* THIRD SECTION */}
+      {/*  */}
 
       <Output result={content} />
       <History when={hasHistory()}>
         <HistoryHeader historyLength={history.past.length}>
-          <Button classes="h-8" onClick={clearHistory}>
+          <Button classes="h-6" onClick={clearHistory}>
             Clear
           </Button>
         </HistoryHeader>
@@ -51,10 +55,11 @@ type MainHeaderProps = {
   title: string;
 };
 const MainHeader: ParentComponent<MainHeaderProps> = (props) => {
+  // flex
   return (
-    <div class="my-3 flex">
+    <div class="my-3 MainHeader">
       <h2>{props.title} : </h2>
-      {props.children}
+      <div class="flex pl-2 gap-2 mt-1">{props.children}</div>
     </div>
   );
 };

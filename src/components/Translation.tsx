@@ -2,8 +2,8 @@ import { JSX, ParentComponent } from "solid-js";
 
 const Translation: ParentComponent<{ children: JSX.Element }> = (props) => {
   return (
-    <div class="flex flex-col">
-      <div class="flex flex-row bordered gap-2">{props.children}</div>
+    <div class="flex flex-col Translation">
+      <div class="flex flex-row gap-2">{props.children}</div>
     </div>
   );
 };

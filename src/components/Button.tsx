@@ -5,7 +5,7 @@ type ButtonProps = {
 };
 const Button = (props: ButtonProps) => {
   return (
-    <button onClick={props.onClick} class={props.classes}>
+    <button onClick={props.onClick} class={`btn ${props.classes}`}>
       <span>{props.children}</span>
     </button>
   );

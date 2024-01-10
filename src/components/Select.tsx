@@ -14,7 +14,7 @@ const Select: VoidComponent<SelectProps> = (props) => {
 
   return (
     <div class="flex items-center">
-      <select name="master" class="text-gray-900 input max-h-11" onChange={(e) => handleSelectMaster(e)}>
+      <select name="master" class="text-gray-900 input" onChange={(e) => handleSelectMaster(e)}>
         <For each={props.masters}>
           {(master) => (
             <option value={master} selected={master === props.selected()}>
