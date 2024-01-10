@@ -1,11 +1,24 @@
-import { createEffect, createResource, createSignal, on, onMount, untrack } from "solid-js";
+import { createEffect, createResource, createSignal, onMount, untrack } from "solid-js";
 import { mastersList, sentencesList } from "../data";
 import { fetchTranslation } from "../services/fetchTranslation";
 import { createStore, produce } from "solid-js/store";
 import { urlifyText } from "../helpers";
 import { clearKey, load, save } from "../services/localStorage";
+import type { Resource } from "solid-js";
 
-export const translationStore = () => {
+export type TranslationStoreType = {
+  chooseMaster: (master: Master) => void;
+  master: () => Master;
+  chooseSentence: (sentence: string) => void;
+  sentence: () => string;
+  randomSentence: () => string;
+  translate: () => void;
+  randomizeAll: () => void;
+  content: Resource<ContentType>;
+  history: HistoryType;
+  clearHistory: () => void;
+};
+export const translationStore = (): TranslationStoreType => {
   /**
    * Translation
    */
@@ -103,18 +116,15 @@ export const translationStore = () => {
   });
 
   return {
-    master,
     chooseMaster,
+    master,
     chooseSentence,
     sentence,
     randomSentence,
-    setSentence,
-    setUrlParam,
+    translate,
+    randomizeAll,
     content,
     history,
-    setHistory,
-    translate,
     clearHistory,
-    randomizeAll,
   };
 };
