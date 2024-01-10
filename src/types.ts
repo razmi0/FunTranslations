@@ -19,10 +19,6 @@ type FunTranslationResponse = {
   };
 };
 
-type MainProps = {
-  title: string;
-};
-
 type Master =
   | "Starwars"
   | "Startrek"
