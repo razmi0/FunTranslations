@@ -66,3 +66,11 @@
 .translated-error {
   @apply text-red-500 underline;
 }
+
+li.list-history-element > button {
+  display: none;
+}
+
+li.list-history-element:hover > button {
+  display: block;
+}
