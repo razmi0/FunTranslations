@@ -1,4 +1,4 @@
-import { Match, Show, Switch } from "solid-js";
+import { Match, Switch } from "solid-js";
 import type { Resource, VoidComponent } from "solid-js";
 import LinkToGoogle from "./LinkToGoogle";
 
