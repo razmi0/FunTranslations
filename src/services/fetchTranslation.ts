@@ -2,15 +2,15 @@ import { emojize, hasEmoji } from "../helpers";
 
 const baseUrl = "https://api.funtranslations.com/translate/";
 
-const defaultContent = {
-  translated: "",
-  text: "",
-  translation: "",
-};
+// const defaultContent = {
+//   translated: "",
+//   text: "",
+//   translation: "",
+// };
 
 export const fetchTranslation = async (urlParams: string) => {
-  console.log("fetch");
   try {
+    console.log("fetch");
     const response = await fetch(baseUrl + urlParams);
     const data: FunTranslationResponse = await response.json();
 
@@ -20,6 +20,6 @@ export const fetchTranslation = async (urlParams: string) => {
 
     return data.contents as ContentType;
   } catch (error) {
-    return defaultContent;
+    throw error;
   }
 };
