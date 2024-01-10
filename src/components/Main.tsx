@@ -1,18 +1,20 @@
-import { ParentComponent } from "solid-js";
-import Translation, { TranslationHeader, SentenceInput } from "./Translation";
+import Translation, { TranslationHeader } from "./Translation";
+import SentenceInput from "./Input";
 import History, { HistoryHeader, HistoryList } from "./History";
 import Select from "./Select";
-import Output from "./Output";
 import Button from "./Button";
 import { mastersList } from "../data";
-import { translationStore } from "../services/stores";
+import type { ParentComponent } from "solid-js";
+import type { TranslationStoreType } from "../stores/translationStore";
+
+type MainProps = {
+  title: string;
+  store: TranslationStoreType;
+};
 
 const Main = (props: MainProps) => {
-  const { chooseMaster, master, chooseSentence, sentence, translate, randomizeAll, content, history, clearHistory } =
-    translationStore();
-
-  const heading = () => master().toLocaleUpperCase();
-  const hasHistory = () => history.past.length > 0;
+  const heading = () => props.store.master().toLocaleUpperCase();
+  const hasHistory = () => props.store.history.past.length > 0;
 
   return (
     <main class="main">
@@ -20,8 +22,8 @@ const Main = (props: MainProps) => {
         {/* */}
 
         <MainHeader title={props.title}>
-          <Select masters={mastersList} onSelected={chooseMaster} selected={master} />
-          <Button onClick={randomizeAll} classes="h-12">
+          <Select masters={mastersList} onSelected={props.store.chooseMaster} selected={props.store.master} />
+          <Button onClick={props.store.randomizeAll} classes="h-12">
             Random
           </Button>
         </MainHeader>
@@ -30,8 +32,13 @@ const Main = (props: MainProps) => {
 
         <Translation>
           <TranslationHeader>{heading()}</TranslationHeader>
-          <SentenceInput setText={chooseSentence} text={sentence()} />
-          <Button onClick={translate} classes="h-12">
+          <SentenceInput
+            setText={props.store.chooseSentence}
+            text={props.store.sentence()}
+            placeholder={props.store.randomSentence()}
+            onEnter={props.store.translate}
+          />
+          <Button onClick={props.store.translate} classes="h-12">
             Translate
           </Button>
         </Translation>
@@ -39,14 +46,13 @@ const Main = (props: MainProps) => {
 
       {/*  */}
 
-      <Output result={content} />
       <History when={hasHistory()}>
-        <HistoryHeader historyLength={history.past.length}>
-          <Button classes="h-6" onClick={clearHistory}>
+        <HistoryHeader historyLength={props.store.history.past.length}>
+          <Button classes="h-6" onClick={props.store.clearHistory}>
             Clear
           </Button>
         </HistoryHeader>
-        <HistoryList history={history} />
+        <HistoryList history={props.store.history} />
       </History>
     </main>
   );
