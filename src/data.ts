@@ -1,4 +1,4 @@
-export const masters: Master[] = [
+export const mastersList: Master[] = [
   "Starwars",
   "Startrek",
   "Got",
@@ -73,7 +73,7 @@ export const masters: Master[] = [
   "Enderman",
   "Wheel-of-time-old-tongue",
 ];
-export const sentences: string[] = [
+export const sentencesList: string[] = [
   "Here's looking at you, kid.",
   "May the Force be with you.",
   "I'll be back.",
