@@ -1,35 +1,6 @@
 import { Component, For, JSX, ParentComponent, Show } from "solid-js";
 import LinkToGoogle from "./LinkToGoogle";
 
-// type HistoryProps = {
-//   history: HistoryType;
-//   clearHistory: () => void;
-// };
-// const History: VoidComponent<HistoryProps> = (props) => {
-//   return (
-//     <div class="history">
-//       <Show when={props.history.past.length > 0} fallback={<div class="m-3 pl-3">No history yet</div>}>
-//         <div class="flex flex-row gap-2 items-center">
-//           <h3 class="my-3">History ({props.history.past.length}) : </h3>
-//           <button class="btn h-5 w-fit" onClick={props.clearHistory}>
-//             <span>Clear</span>
-//           </button>
-//         </div>
-//         <ul>
-//           <For each={props.history.past}>
-//             {(item) => (
-//               <li class="my-1">
-//                 {item?.translation.toLocaleUpperCase()} : {item?.text} {"=>"}{" "}
-//                 <LinkToGoogle searchParam={item?.text}>{item?.translated}</LinkToGoogle>
-//               </li>
-//             )}
-//           </For>
-//         </ul>
-//       </Show>
-//     </div>
-//   );
-// };
-
 type HistoryHeaderProps = {
   historyLength: string | number;
   /** Button please */
