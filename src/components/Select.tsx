@@ -1,10 +1,10 @@
-import { For } from "solid-js";
+import { For, Accessor } from "solid-js";
 import type { Setter, VoidComponent } from "solid-js";
 
 type SelectProps = {
   masters: Master[];
-  defaultMaster: Master;
-  onSelected: Setter<Master>;
+  onSelected: (master: Master) => void;
+  selected: Accessor<Master>;
 };
 const Select: VoidComponent<SelectProps> = (props) => {
   const handleSelectMaster = (e: Event) => {
@@ -13,12 +13,15 @@ const Select: VoidComponent<SelectProps> = (props) => {
   };
 
   return (
-    <div>
+    <div class="flex items-center">
       <select name="master" class="text-gray-900 input max-h-11" onChange={(e) => handleSelectMaster(e)}>
-        <option value={props.defaultMaster} selected>
-          {props.defaultMaster}
-        </option>
-        <For each={props.masters}>{(master) => <option value={master}>{master}</option>}</For>
+        <For each={props.masters}>
+          {(master) => (
+            <option value={master} selected={master === props.selected()}>
+              {master}
+            </option>
+          )}
+        </For>
       </select>
     </div>
   );

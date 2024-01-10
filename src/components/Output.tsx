@@ -5,6 +5,7 @@ import LinkToGoogle from "./LinkToGoogle";
 type OutputProps = {
   result: Resource<FunTranslationResponse["contents"] | undefined>;
 };
+
 const Output: VoidComponent<OutputProps> = (props) => {
   return (
     <>
