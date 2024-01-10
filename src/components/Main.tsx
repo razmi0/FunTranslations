@@ -1,4 +1,3 @@
-import { ErrorBoundary } from "solid-js";
 import Translation, { TranslationHeader } from "./Translation";
 import SentenceInput from "./Input";
 import History, { HistoryHeader, HistoryList } from "./History";
@@ -31,20 +30,18 @@ const Main = (props: MainProps) => {
 
         {/* */}
 
-        <ErrorBoundary fallback={<div>WROOOOOONG</div>}>
-          <Translation>
-            <TranslationHeader>{heading()}</TranslationHeader>
-            <SentenceInput
-              setText={props.store.chooseSentence}
-              text={props.store.sentence()}
-              placeholder={props.store.randomSentence()}
-              onEnter={props.store.translate}
-            />
-            <Button onClick={props.store.translate} classes="h-12">
-              Translate
-            </Button>
-          </Translation>
-        </ErrorBoundary>
+        <Translation>
+          <TranslationHeader>{heading()}</TranslationHeader>
+          <SentenceInput
+            setText={props.store.chooseSentence}
+            text={props.store.sentence()}
+            placeholder={props.store.randomSentence()}
+            onEnter={props.store.translate}
+          />
+          <Button onClick={props.store.translate} classes="h-12">
+            Translate
+          </Button>
+        </Translation>
       </div>
 
       {/*  */}
@@ -55,7 +52,7 @@ const Main = (props: MainProps) => {
             Clear
           </Button>
         </HistoryHeader>
-        <HistoryList history={props.store.history} />
+        <HistoryList history={props.store.history} delete={props.store.deleteHistory} />
       </History>
     </main>
   );
@@ -64,9 +61,8 @@ type MainHeaderProps = {
   title: string;
 };
 const MainHeader: ParentComponent<MainHeaderProps> = (props) => {
-  // flex
   return (
-    <div class="my-3 MainHeader">
+    <div class="my-3">
       <h2>{props.title} : </h2>
       <div class="flex pl-2 gap-2 mt-1">{props.children}</div>
     </div>
