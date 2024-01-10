@@ -12,3 +12,8 @@ export const load = <T>(key: string): T | null => {
   }
   return JSON.parse(json);
 };
+
+export const clearKey = (key: string) => {
+  const localStorage = window.localStorage;
+  localStorage.removeItem(key);
+};
