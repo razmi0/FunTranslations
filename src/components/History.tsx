@@ -48,7 +48,7 @@ type HistoryItemProps = {
   item: ContentType;
 };
 const HistoryItem: Component<HistoryItemProps> = (props) => (
-  <li class="my-1">
+  <li class="mb-1 leading-5">
     {props.item.translation?.toLocaleUpperCase()} : {props.item.text} {"=>"}{" "}
     <LinkToGoogle searchParam={props.item.text}>{props.item.translated}</LinkToGoogle>
   </li>
@@ -58,7 +58,7 @@ type HistoryListProps = {
   history: HistoryType;
 };
 export const HistoryList: Component<HistoryListProps> = (props) => (
-  <ul>
+  <ul class="flex flex-col">
     <For each={props.history.past}>{(item) => <HistoryItem item={item} />}</For>
   </ul>
 );

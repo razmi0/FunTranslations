@@ -1,4 +1,3 @@
-import { createSignal } from "solid-js";
 import { emojize, hasEmoji } from "../helpers";
 
 const baseUrl = "https://api.funtranslations.com/translate/";

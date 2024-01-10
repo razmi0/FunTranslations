@@ -1,5 +1,5 @@
 import { createEffect, createResource, createSignal, onMount, untrack } from "solid-js";
-import { mastersList, sentencesList } from "../data";
+import { mastersList, sentencesList } from "../data/data";
 import { fetchTranslation } from "../services/fetchTranslation";
 import { createStore, produce } from "solid-js/store";
 import { urlifyText } from "../helpers";

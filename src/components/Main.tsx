@@ -3,7 +3,7 @@ import SentenceInput from "./Input";
 import History, { HistoryHeader, HistoryList } from "./History";
 import Select from "./Select";
 import Button from "./Button";
-import { mastersList } from "../data";
+import { mastersList } from "../data/data";
 import type { ParentComponent } from "solid-js";
 import type { TranslationStoreType } from "../stores/translationStore";
 

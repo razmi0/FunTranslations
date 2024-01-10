@@ -8,12 +8,10 @@ const mainTitle = "Translations from another world";
 const App: Component = () => {
   const store = translationStore();
   return (
-    <>
-      <MainContainer>
-        <Main title={mainTitle} store={store} />
-      </MainContainer>
+    <MainContainer>
+      <Main title={mainTitle} store={store} />
       <Output result={store.content} />
-    </>
+    </MainContainer>
   );
 };
 
