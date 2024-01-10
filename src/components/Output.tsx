@@ -16,13 +16,11 @@ const Output: VoidComponent<OutputProps> = (props) => {
       <Show when={props.result.loading}>
         <div class="w-full min-h-10 three-dots-animation">Loading</div>
       </Show>
-      <Show when={props.result.error}>
-        <div class="w-full min-h-10">No 💋 </div>
-      </Show>
       <Show when={props.result.latest}>
         <output class="w-full min-h-10 translated-text">
           <Show when={hasError()}>
-            <span class="translated-error">{`> ${translated()}  😬`}</span>
+            <span class="translated-error">{`> ${translated()} `}</span>
+            <span> 😬</span>
           </Show>
           <Show when={!hasError()}>
             <LinkToGoogle searchParam={text()}>{`> ${translated()}`}</LinkToGoogle>
