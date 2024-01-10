@@ -17,6 +17,7 @@ export type TranslationStoreType = {
   content: Resource<ContentType>;
   history: HistoryType;
   clearHistory: () => void;
+  deleteHistory: (index: number) => void;
 };
 export const translationStore = (): TranslationStoreType => {
   /**
@@ -49,6 +50,11 @@ export const translationStore = (): TranslationStoreType => {
   const clearHistory = () => {
     setHistory("past", []);
     clearKey("history");
+  };
+
+  const deleteHistory = (index: number) => {
+    setHistory(produce((draft) => draft.past.splice(index, 1)));
+    saveHistory();
   };
 
   const saveHistory = () => {
@@ -121,5 +127,6 @@ export const translationStore = (): TranslationStoreType => {
     content,
     history,
     clearHistory,
+    deleteHistory,
   };
 };
