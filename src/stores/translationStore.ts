@@ -24,28 +24,14 @@ export const translationStore = (): TranslationStoreType => {
   /**
    * Translation
    */
-
   const [master, setMaster] = createSignal(mastersList[0]);
   const [sentence, setSentence] = createSignal(sentencesList[0]);
   const [urlParam, setUrlParam] = createSignal<string>();
   const [content] = createResource(urlParam, fetchTranslation);
 
-  const translate = () => {
-    setUrlParam(`${master()}?text=${urlifyText(sentence())}`);
-  };
-
-  const chooseMaster = (master: Master) => {
-    setMaster(master);
-  };
-
-  const chooseSentence = (sentence: string) => {
-    setSentence(sentence);
-  };
-
   /**
    * History
    */
-
   const [history, setHistory] = createStore<HistoryType>({ past: [] });
 
   const clearHistory = () => {
@@ -118,12 +104,12 @@ export const translationStore = (): TranslationStoreType => {
   });
 
   return {
-    chooseMaster,
+    chooseMaster: (master: Master) => setMaster(master),
     master,
-    chooseSentence,
+    chooseSentence: (sentence: string) => setSentence(sentence),
     sentence,
     randomSentence,
-    translate,
+    translate: () => setUrlParam(`${master()}?text=${urlifyText(sentence())}`),
     randomizeAll,
     content,
     history,

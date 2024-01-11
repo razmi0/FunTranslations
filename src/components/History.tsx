@@ -20,10 +20,11 @@ type HistoryItemProps = {
   deleteItem: () => void;
 };
 const HistoryItem: Component<HistoryItemProps> = (props) => {
+  const deleteIcon = "✖";
   return (
-    <li class="list-history-element">
-      <button class="mr-3 text-sm appearance-none" onClick={props.deleteItem}>
-        ✖
+    <li class="list-history-element h-6">
+      <button class="w-6 text-xl appearance-none" onClick={props.deleteItem}>
+        {deleteIcon}
       </button>
       {props.item.translation?.toLocaleUpperCase()} : {props.item.text} {" => "}
       <LinkToGoogle classes="ml-2" searchParam={props.item.text}>

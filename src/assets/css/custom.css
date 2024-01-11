@@ -86,7 +86,7 @@
 }
 
 .list-history-element {
-  @apply mb-1 leading-5 flex;
+  @apply leading-5 flex;
 }
 li.list-history-element > button {
   display: none;
