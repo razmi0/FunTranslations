@@ -1,4 +1,4 @@
-import Translation, { TranslationHeader } from "./Translation";
+import TranslationSection, { TranslationHeader } from "./Translation";
 import SentenceInput from "./Input";
 import Select from "./Select";
 import Button from "./Button";
@@ -11,24 +11,24 @@ type MainProps = {
   store: TranslationStoreType;
 };
 
-const Main = (props: MainProps) => {
-  const heading = () => props.store.master().toLocaleUpperCase().replace(/[-_]/, " ");
+const InputSection = (props: MainProps) => {
+  const heading = () => props.store.master().toLocaleUpperCase().replace(/[-_]/g, " ");
 
   return (
-    <section class="main">
+    <section class="pt-3">
       <div class="border-r-2">
         {/* */}
 
-        <MainHeader title={props.title}>
+        <SelectSection title={props.title}>
           <Select masters={mastersList} onSelected={props.store.chooseMaster} selected={props.store.master} />
-          <Button onClick={props.store.randomizeAll} classes="h-12">
+          <Button onClick={props.store.randomizeAll} classes="h-12 slider-btn-ctn">
             Random
           </Button>
-        </MainHeader>
+        </SelectSection>
 
         {/* */}
 
-        <Translation>
+        <TranslationSection>
           <TranslationHeader>{heading()}</TranslationHeader>
           <SentenceInput
             setText={props.store.chooseSentence}
@@ -39,22 +39,21 @@ const Main = (props: MainProps) => {
           <Button onClick={props.store.translate} classes="h-12">
             Translate
           </Button>
-        </Translation>
+        </TranslationSection>
       </div>
     </section>
   );
 };
-type MainHeaderProps = {
+type SelectSectionProps = {
   title: string;
 };
-const MainHeader: ParentComponent<MainHeaderProps> = (props) => {
+const SelectSection: ParentComponent<SelectSectionProps> = (props) => {
   return (
     <div class="my-3">
       <h2>{props.title} : </h2>
-      <div class="flex pl-2 gap-2 mt-1">{props.children}</div>
+      <div class="flex pl-2 gap-2 mt-1 flex-wrap heeere">{props.children}</div>
     </div>
   );
 };
 
-// <History history={history} clearHistory={clearHistory} />
-export default Main;
+export default InputSection;

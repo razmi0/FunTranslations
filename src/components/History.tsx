@@ -22,15 +22,21 @@ type HistoryItemProps = {
 const HistoryItem: Component<HistoryItemProps> = (props) => {
   const deleteIcon = "✖";
   return (
-    <li class="list-history-element h-6">
-      <button class="w-6 text-xl appearance-none" onClick={props.deleteItem}>
-        {deleteIcon}
-      </button>
-      {props.item.translation?.toLocaleUpperCase()} : {props.item.text} {" => "}
-      <LinkToGoogle classes="ml-2" searchParam={props.item.text}>
-        {props.item.translated}
-      </LinkToGoogle>
-    </li>
+    <>
+      <li class="list-history-element justify-between w-full">
+        <div class="flex flex-row h-7">
+          <button class="w-6 text-xl" onClick={props.deleteItem}>
+            {deleteIcon}
+          </button>
+          <span>{props.item.translation?.toLocaleUpperCase()} : </span>
+        </div>
+        <span>{props.item.text}</span>
+        <LinkToGoogle classes="ml-2" searchParam={props.item.text}>
+          {props.item.translated}
+        </LinkToGoogle>
+        <hr class="list-history-separator mt-1" />
+      </li>
+    </>
   );
 };
 

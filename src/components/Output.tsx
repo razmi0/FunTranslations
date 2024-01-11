@@ -16,7 +16,7 @@ const Output: VoidComponent<OutputProps> = (props) => {
       <Show when={props.result.loading}>
         <LoadingOutput />
       </Show>
-      <Show when={props.result.latest}>
+      <Show when={props.result.latest && !props.result.loading}>
         <Show when={hasError()}>
           <ErroredOutput text={translated()} />
         </Show>

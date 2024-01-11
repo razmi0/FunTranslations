@@ -35,7 +35,7 @@ export const SentenceInput: ParentComponent<SentenceInputProps> = (props) => {
   };
 
   return (
-    <div class="main-box min-w-64 ml-1">
+    <div class="min-w-64 ml-1">
       <Input
         value={props.text}
         onInput={handleOnInput}
@@ -88,6 +88,8 @@ export const Input: Component<InputProps> = (props) => {
       placeholder={props.placeholder || "Enter a sentence..."}
       onInput={props.onInput}
       onKeyDown={handleKeyDown}
+      maxLength={70}
+      minLength={1}
     />
   );
 };
