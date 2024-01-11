@@ -33,6 +33,24 @@
   content: "...";
 }
 
+.typed-out {
+  overflow: hidden;
+  /* border-right: 0.15em solid orange; */
+  white-space: nowrap;
+  /* font-size: 1.6rem; */
+  width: 0;
+  animation: typing 1s steps(20, end) forwards;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
 @keyframes three-points {
   0% {
     content: "";
@@ -49,7 +67,7 @@
 }
 
 .main-box {
-  @apply flex flex-grow justify-center self-center h-full;
+  @apply flex flex-grow justify-center self-center h-full text-balance;
 }
 
 .footer {
@@ -67,6 +85,9 @@
   @apply text-red-500 underline;
 }
 
+.list-history-element {
+  @apply mb-1 leading-5 flex;
+}
 li.list-history-element > button {
   display: none;
 }

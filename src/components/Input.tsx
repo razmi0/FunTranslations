@@ -35,7 +35,7 @@ export const SentenceInput: ParentComponent<SentenceInputProps> = (props) => {
   };
 
   return (
-    <div class="main-box">
+    <div class="main-box min-w-64 ml-1">
       <Input
         value={props.text}
         onInput={handleOnInput}

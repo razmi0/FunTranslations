@@ -19,6 +19,7 @@
 *::after {
   box-sizing: border-box;
   font-family: var(--font-style-1);
+  align-items: center;
 }
 
 body {
@@ -30,7 +31,6 @@ body {
   background-color: #282c34;
   height: 100vh;
   padding: 2%;
-  cursor: crosshair;
 }
 
 #root {

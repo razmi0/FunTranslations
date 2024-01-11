@@ -10,6 +10,14 @@
 - use onMount() for ref or first fast fetches
 - use onCleanup() for unsubscribing
 
+=> two variables (a select and a text input) => contentType (
+contents: {
+translated: string;
+text: string;
+translation: string;
+};
+)
+
 # Resources
 
 - [StarWarsApi](https://swapi.dev/)

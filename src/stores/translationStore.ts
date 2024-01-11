@@ -1,5 +1,5 @@
 import { createEffect, createResource, createSignal, onMount, untrack } from "solid-js";
-import { mastersList, sentencesList } from "../data/data";
+import { mastersList, sentencesList } from "./data";
 import { fetchTranslation } from "../services/fetchTranslation";
 import { createStore, produce } from "solid-js/store";
 import { urlifyText } from "../helpers";
@@ -18,6 +18,7 @@ export type TranslationStoreType = {
   history: HistoryType;
   clearHistory: () => void;
   deleteHistory: (index: number) => void;
+  hasHistory: () => boolean;
 };
 export const translationStore = (): TranslationStoreType => {
   /**
@@ -128,5 +129,6 @@ export const translationStore = (): TranslationStoreType => {
     history,
     clearHistory,
     deleteHistory,
+    hasHistory: () => history.past.length > 0,
   };
 };

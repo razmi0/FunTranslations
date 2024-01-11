@@ -33,15 +33,15 @@ type ErroredOutputProps = {
 };
 const ErroredOutput: Component<ErroredOutputProps> = (props) => {
   return (
-    <output class="w-full min-h-10 mt-2">
-      <span class=" translated-error">{`> ${props.text}`}</span>
-      <span> 😬</span>
+    <output class="min-h-10 mt-5 inline-flex w-fit">
+      <div class="translated-error typed-out ">{`> ${props.text} `}</div>
+      <span class="ml-2"> 😬</span>
     </output>
   );
 };
 
 const LoadingOutput: VoidComponent = () => {
-  return <div class="w-full min-h-10 three-dots-animation">Loading</div>;
+  return <div class="min-h-10 mt-5 three-dots-animation">Loading</div>;
 };
 
 type TranslatedOutputProps = {
@@ -50,8 +50,8 @@ type TranslatedOutputProps = {
 };
 const TranslatedOutput: Component<TranslatedOutputProps> = (props) => {
   return (
-    <output class="w-full min-h-10 translated-text">
-      <LinkToGoogle searchParam={props.text}>{`> ${props.translated}`}</LinkToGoogle>
+    <output class="min-h-10 mt-5 translated-text w-full">
+      <LinkToGoogle classes="inline-flex w-fit" searchParam={props.text}>{`> ${props.translated}`}</LinkToGoogle>
     </output>
   );
 };

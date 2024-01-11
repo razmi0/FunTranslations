@@ -1,9 +1,8 @@
 import Translation, { TranslationHeader } from "./Translation";
 import SentenceInput from "./Input";
-import History, { HistoryHeader, HistoryList } from "./History";
 import Select from "./Select";
 import Button from "./Button";
-import { mastersList } from "../data/data";
+import { mastersList } from "../stores/data";
 import type { ParentComponent } from "solid-js";
 import type { TranslationStoreType } from "../stores/translationStore";
 
@@ -13,11 +12,10 @@ type MainProps = {
 };
 
 const Main = (props: MainProps) => {
-  const heading = () => props.store.master().toLocaleUpperCase();
-  const hasHistory = () => props.store.history.past.length > 0;
+  const heading = () => props.store.master().toLocaleUpperCase().replace(/[-_]/, " ");
 
   return (
-    <main class="main">
+    <section class="main">
       <div class="border-r-2">
         {/* */}
 
@@ -43,18 +41,7 @@ const Main = (props: MainProps) => {
           </Button>
         </Translation>
       </div>
-
-      {/*  */}
-
-      <History when={hasHistory()}>
-        <HistoryHeader historyLength={props.store.history.past.length}>
-          <Button classes="h-6" onClick={props.store.clearHistory}>
-            Clear
-          </Button>
-        </HistoryHeader>
-        <HistoryList history={props.store.history} delete={props.store.deleteHistory} />
-      </History>
-    </main>
+    </section>
   );
 };
 type MainHeaderProps = {

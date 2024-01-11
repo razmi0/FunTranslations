@@ -21,7 +21,7 @@ type HistoryItemProps = {
 };
 const HistoryItem: Component<HistoryItemProps> = (props) => {
   return (
-    <li class="mb-1 leading-5 flex list-history-element">
+    <li class="list-history-element">
       <button class="mr-3 text-sm appearance-none" onClick={props.deleteItem}>
         ✖
       </button>
@@ -38,7 +38,7 @@ type HistoryListProps = {
   delete: (index: number) => void;
 };
 export const HistoryList: Component<HistoryListProps> = (props) => (
-  <ul class="flex flex-col">
+  <ul class="flex flex-col items-start">
     <For each={props.history.past}>
       {(item, i) => {
         const deleteItem = () => props.delete(i());
@@ -51,8 +51,9 @@ export const HistoryList: Component<HistoryListProps> = (props) => (
 type HistoryProps = {
   when: boolean;
 };
+
 const History: ParentComponent<HistoryProps> = (props) => (
-  <div class="history">
+  <div class="history w-full">
     <Show when={props.when} fallback={<div class="m-3 pl-3">No history yet</div>}>
       {props.children}
     </Show>
