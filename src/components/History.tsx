@@ -60,11 +60,11 @@ type HistoryProps = {
 };
 
 const History: ParentComponent<HistoryProps> = (props) => (
-  <div class="history w-full">
+  <section class="history w-full">
     <Show when={props.when} fallback={<div class="m-3 pl-3">No history yet</div>}>
       {props.children}
     </Show>
-  </div>
+  </section>
 );
 
 export default History;

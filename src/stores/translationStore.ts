@@ -24,8 +24,8 @@ export const translationStore = (): TranslationStoreType => {
   /**
    * Translation
    */
-  const [master, setMaster] = createSignal(mastersList[0]);
-  const [sentence, setSentence] = createSignal(sentencesList[0]);
+  const [master, setMaster] = createSignal(mastersList[58]);
+  const [sentence, setSentence] = createSignal(sentencesList[3]);
   const [urlParam, setUrlParam] = createSignal<string>();
   const [content] = createResource(urlParam, fetchTranslation);
 

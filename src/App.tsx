@@ -1,10 +1,10 @@
 import Button from "./components/Button";
 import History, { HistoryHeader, HistoryList } from "./components/History";
-import { SelectSection, InputWrapper } from "./components/Wrappers";
+import { SelectSection, InputWrapper, TranslationSection } from "./components/Wrappers";
 import Output from "./components/Output";
 import { translationStore } from "./stores/translationStore";
 import Select from "./components/Select";
-import TranslationSection, { TranslationHeader } from "./components/Translation";
+import TranslationHeader from "./components/TranslationHeader";
 import SentenceInput from "./components/Input";
 import { mastersList } from "./stores/data";
 import type { Component } from "solid-js";
