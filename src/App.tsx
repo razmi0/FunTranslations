@@ -10,9 +10,9 @@ import { mastersList } from "./stores/data";
 import type { Component } from "solid-js";
 
 const mainTitle = "Translations from another world";
-const store = translationStore();
 
 const App: Component = () => {
+  const store = translationStore();
   const heading = () => store.master().toLocaleUpperCase().replace(/[-_]/g, " ");
   return (
     <>

@@ -123,7 +123,3 @@ export const sentencesList: string[] = [
   "I am Jack's complete lack of surprise.",
   "I'm ready for my close-up, Mr. DeMille.",
 ];
-
-let arr: number[] = [];
-mastersList.map((m) => arr.push(m.length));
-console.log(arr);
