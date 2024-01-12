@@ -17,10 +17,7 @@ const Select: VoidComponent<SelectProps> = (props) => {
 
   onMount(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (ref && !ref.contains(e.target as Node)) {
-        setIsListOpen(false);
-        console.log("click outside");
-      }
+      if (ref && !ref.contains(e.target as Node)) setIsListOpen(false);
     };
     document.addEventListener("mousedown", handleClickOutside);
   });
