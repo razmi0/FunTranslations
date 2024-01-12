@@ -5,7 +5,7 @@ type SelectSectionProps = {
 };
 export const SelectSection: ParentComponent<SelectSectionProps> = (props) => {
   return (
-    <div class="my-3">
+    <div class="my-4">
       <h2>{props.title} : </h2>
       <div class="flex pl-2 gap-2 sm:gap-5 mt-1 flex-wrap">{props.children}</div>
     </div>
