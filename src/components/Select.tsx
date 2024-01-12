@@ -1,5 +1,5 @@
 import { For, Accessor } from "solid-js";
-import type { Setter, VoidComponent } from "solid-js";
+import type { VoidComponent } from "solid-js";
 
 type SelectProps = {
   masters: Master[];

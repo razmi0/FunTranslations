@@ -1,19 +1,47 @@
 import Button from "./components/Button";
 import History, { HistoryHeader, HistoryList } from "./components/History";
-import InputSection from "./components/Main";
+import { SelectSection, InputWrapper } from "./components/Wrappers";
 import Output from "./components/Output";
 import { translationStore } from "./stores/translationStore";
-import type { Component, ParentComponent } from "solid-js";
+import Select from "./components/Select";
+import TranslationSection, { TranslationHeader } from "./components/Translation";
+import SentenceInput from "./components/Input";
+import { mastersList } from "./stores/data";
+import type { Component } from "solid-js";
 
 const mainTitle = "Translations from another world";
+const store = translationStore();
 
 const App: Component = () => {
-  const store = translationStore();
+  const heading = () => store.master().toLocaleUpperCase().replace(/[-_]/g, " ");
   return (
     <>
       <InputWrapper>
-        <InputSection title={mainTitle} store={store} />
+        <SelectSection title={mainTitle}>
+          <Select masters={mastersList} onSelected={store.chooseMaster} selected={store.master} />
+          <Button onClick={store.randomizeAll} classes="h-12 slider-btn-ctn">
+            Random
+          </Button>
+        </SelectSection>
+
+        {/* */}
+
+        <TranslationSection>
+          <TranslationHeader>{heading()}</TranslationHeader>
+          <SentenceInput
+            setText={store.chooseSentence}
+            text={store.sentence()}
+            placeholder={store.randomSentence()}
+            onEnter={store.translate}
+          />
+          <Button onClick={store.translate} classes="h-12">
+            Translate
+          </Button>
+        </TranslationSection>
       </InputWrapper>
+
+      {/* */}
+
       <History when={store.hasHistory()}>
         <HistoryHeader historyLength={store.history.past.length}>
           <Button classes="h-6" onClick={store.clearHistory}>
@@ -22,13 +50,12 @@ const App: Component = () => {
         </HistoryHeader>
         <HistoryList history={store.history} delete={store.deleteHistory} />
       </History>
+
+      {/* */}
+
       <Output result={store.content} />
     </>
   );
-};
-
-const InputWrapper: ParentComponent = (props) => {
-  return <div class="container flex flex-col">{props.children}</div>;
 };
 
 export default App;
