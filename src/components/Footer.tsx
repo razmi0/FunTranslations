@@ -1,4 +1,5 @@
 import { Component } from "solid-js";
+import spriteHref from "/sprite.svg?url";
 
 const Footer: Component = () => {
   return (
@@ -17,7 +18,7 @@ const SvgIcon: Component<SvgIconProps> = (props) => {
   return (
     <a href={props.link}>
       <svg width={props.width} height={props.height}>
-        <use href={`/src/assets/sprite.svg#${props.name}`} />
+        <use href={`${spriteHref}#${props.name}`} />
       </svg>
     </a>
   );
