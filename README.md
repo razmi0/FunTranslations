@@ -6,6 +6,8 @@
 
 # Fun Translations
 
+https://translation-fun.netlify.app
+
 <p>🗣 This app will translate whatever you want into whatever fun translation you want. Yoda, Minion, Pirate, Irish, Draconic... +70 options.</p>
 
 It uses [FunTranslationApi](https://funtranslations.com/api/) to translate the text.
