@@ -65,9 +65,8 @@
 }
 
 .footer {
-  @apply p-3 w-fit flex justify-center absolute bottom-0 m-3 px-10;
+  @apply p-3 flex justify-end w-full absolute bottom-0 m-3 px-5 sm:px-10;
   gap: var(--gap);
-  border: var(--border);
 }
 
 .translated-text {

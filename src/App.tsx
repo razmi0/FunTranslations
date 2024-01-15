@@ -8,6 +8,7 @@ import TranslationHeader from "./components/TranslationHeader";
 import SentenceInput from "./components/Input";
 import { mastersList } from "./stores/data";
 import type { Component } from "solid-js";
+import Footer from "./components/Footer";
 
 const mainTitle = "Translations from another world";
 
@@ -54,6 +55,7 @@ const App: Component = () => {
       {/* */}
 
       <Output result={store.content} />
+      <Footer />
     </>
   );
 };
