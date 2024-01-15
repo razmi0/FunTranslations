@@ -1,23 +1,15 @@
-# Notes on SolidJS
+[![Netlify Status](https://api.netlify.com/api/v1/badges/946fab2a-c28c-43b1-b631-ba06375f7fb9/deploy-status)](https://app.netlify.com/sites/translation-fun/deploys)
 
-- ⚠️ CreateSignal updates for shallow data struct (strings, numbers...) but not for deep data struct (object, array...)
-- ⚠️ No deconstruction of props at component parameters level ( break fined grained updates )
-- Signal value is a function (call it) ex : state()
-- No virtual dom => no diffing => no reconciliation => no key
-- onInput fires on every keystroke, onChange fires on blur
-- ⚠️ With stored states, each prop value is a signal
-- ⚠️ Access value of stored object with point notation (state.prop)
-- use onMount() for ref or first fast fetches
-- use onCleanup() for unsubscribing
+![SolidJS](https://img.shields.io/badge/SolidJS-2c4f7c?style=for-the-badge&logo=solid&logoColor=c8c9cb)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38b2ac?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 
-=> two variables (a select and a text input) => contentType (
-contents: {
-translated: string;
-text: string;
-translation: string;
-};
-)
+# Fun Translations
 
-# Resources
+<p>🗣 This app will translate whatever you want into whatever fun translation you want. Yoda, Minion, Pirate, Irish, Draconic... +70 options.</p>
 
-- [StarWarsApi](https://swapi.dev/)
+It uses [FunTranslationApi](https://funtranslations.com/api/) to translate the text.
+
+Made with [SolidJS](https://www.solidjs.com/), [TailwindCSS](https://tailwindcss.com/) and [Vite](https://vitejs.dev/).
+
+Build to be fast.
